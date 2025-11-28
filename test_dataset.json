@@ -1,0 +1,146 @@
+[
+    {
+        "id": 0,
+        "verdict": "Plagiarism",
+        "label": 1,
+        "student_code": "def build_list(number_elements: int, key_val: int):\n    result_list = []\n    used_numbers = set()\n    key_val += 1\n    i = 0\n    while i < number_elements:\n        i += 1\n        if i not in used_numbers:\n            result_list.append(i)\n            used_numbers.add(i)\n        if key_val not in used_numbers:\n            result_list.append(key_val)\n            used_numbers.add(key_val)\n            key_val -= 1\n    return result_list",
+        "original_code": "def constructArray(self, n: int, k: int) -> List[int]:\n        array = []\n        visited = set()\n        k += 1\n        for i in range(n):\n            i += 1\n            if i not in visited:\n                array.append(i)\n                visited.add(i)\n            if k not in visited:\n                array.append(k)\n                visited.add(k)\n                k -= 1\n        return array",
+        "original_function_name": "unknown",
+        "type": "POSITIVE (PLAGIARISM)"
+    },
+    {
+        "id": 1,
+        "verdict": "Original",
+        "label": 0,
+        "student_code": "def iterative_removal(root, target):\n    if not root:\n        return root\n\n    queue = [root]\n    while queue:\n        node = queue.pop(0)\n        \n        if node.left:\n            if node.left.val == target and not node.left.left and not node.left.right:\n                node.left = None\n            else:\n                queue.append(node.left)\n        \n        if node.right:\n            if node.right.val == target and not node.right.left and not node.right.right:\n                node.right = None\n            else:\n                queue.append(node.right)\n    return root",
+        "original_code": "def dfs(self, root, target):\n        if not root:\n            return\n        self.dfs(root.left, target)\n        self.dfs(root.right, target)\n        if root.left and root.left.val == target and not root.left.left and not root.left.right:\n            root.left = None\n        if root.right and root.right.val == target and not root.right.left and not root.right.right:\n            root.right = None",
+        "original_function_name": "unknown",
+        "type": "NEGATIVE (ORIGINAL)"
+    },
+    {
+        "id": 2,
+        "verdict": "Plagiarism",
+        "label": 1,
+        "student_code": "def remove_node(origin, identifier):\n    if not origin:\n        return None\n    if identifier < origin.val:\n        origin.left = remove_node(origin.left, identifier)\n    elif identifier > origin.val:\n        origin.right = remove_node(origin.right, identifier)\n    else:\n        if not origin.left:\n            temp = origin.right\n            origin = None\n            return temp\n        elif not origin.right:\n            temp = origin.left\n            origin = None\n            return temp\n        \n        current = origin.right\n        while current.left:\n            current = current.left\n            \n        origin.val = current.val\n        origin.right = remove_node(origin.right, current.val)\n    return origin",
+        "original_code": "def deleteNode(self, root, key):\n    if not root: return None\n    if key < root.val: \n        root.left = self.deleteNode(root.left, key)\n    elif key > root.val:\n        root.right = self.deleteNode(root.right, key)\n    else:\n        # if this node has only one child or no child:\n        if not root.left:\n            temp = root.right\n            root = None\n            return temp\n        elif not root.right:\n            temp = root.left\n            root = None\n            return temp\n        \n        # otherwise, find the inorder successor:\n        curr = root.right\n        while curr.left:\n            curr = curr.left\n        \n        root.val = curr.val\n        root.right = self.deleteNode(root.right, curr.val)\n    return root",
+        "original_function_name": "unknown",
+        "type": "POSITIVE (PLAGIARISM)"
+    },
+    {
+        "id": 3,
+        "verdict": "Original",
+        "label": 0,
+        "student_code": "def iterative_preorder(root):\n    if not root:\n        return []\n\n    result = []\n    stack = [root]\n\n    while stack:\n        node = stack.pop()\n        result.append(node.val)\n\n        if node.right:\n            stack.append(node.right)\n        if node.left:\n            stack.append(node.left)\n\n    return result",
+        "original_code": "def preorder(self, root, result):\n        if not root:\n            return 0\n        if root.val not in result:\n            result.append(root.val)\n        if root.left:\n            self.preorder(root.left, result)\n        if root.right:\n            self.preorder(root.right, result)",
+        "original_function_name": "unknown",
+        "type": "NEGATIVE (ORIGINAL)"
+    },
+    {
+        "id": 4,
+        "verdict": "Plagiarism",
+        "label": 1,
+        "student_code": "def maxGain(stock_prices):\n    buy_one = float('inf')\n    buy_two = float('inf')\n    profit_one = 0\n    overall_profit = 0\n    i = 0\n    while i < len(stock_prices):\n        price = stock_prices[i]\n        buy_one = min(buy_one, price)\n        profit_one = max(profit_one, price - buy_one)\n        buy_two = min(buy_two, price - profit_one)\n        overall_profit = max(overall_profit, price - buy_two)\n        i += 1\n    return overall_profit",
+        "original_code": "def maxProfit(self, prices: List[int]) -> int:\n        transaction_one = float(inf)\n        transaction_two = float(inf)\n        current_profit = 0\n        total_profit = 0\n        for price in prices:\n            transaction_one = min(transaction_one, price)\n            current_profit = max(current_profit, price - transaction_one)\n            transaction_two = min(transaction_two, price - current_profit)\n            total_profit = max(total_profit, price - transaction_two)\n        return total_profit",
+        "original_function_name": "unknown",
+        "type": "POSITIVE (PLAGIARISM)"
+    },
+    {
+        "id": 5,
+        "verdict": "Original",
+        "label": 0,
+        "student_code": "def longest_substring_without_repeating_characters(s: str) -> int:\n    n = len(s)\n    longest = 0\n    for i in range(n):\n        seen = set()\n        for j in range(i, n):\n            if s[j] in seen:\n                break\n            seen.add(s[j])\n            longest = max(longest, j - i + 1)\n    return longest",
+        "original_code": "def lengthOfLongestSubstring(self, s: str) -> int:\n        i = 0\n        j = 1\n        lss = 0\n        length = len(s)\n        if length < 2:\n            return length\n        s += s[-1]\n        while j <= length:\n            if len(set(s[i:j])) < len(s[i:j]):\n                i += 1\n            lss = max(lss, len(s[i:j]))\n            j += 1\n        return lss",
+        "original_function_name": "unknown",
+        "type": "NEGATIVE (ORIGINAL)"
+    },
+    {
+        "id": 6,
+        "verdict": "Plagiarism",
+        "label": 1,
+        "student_code": "def prune_tree(root, val):\n    def traverse(node, val):\n        if not node:\n            return False\n\n        left_leaf = traverse(node.left, val)\n        right_leaf = traverse(node.right, val)\n\n        if left_leaf:\n            node.left = None\n        if right_leaf:\n            node.right = None\n\n        if node.val == val and not node.left and not node.right:\n            return True\n        else:\n            return False\n\n    if traverse(root, val):\n        return None\n    return root",
+        "original_code": "def removeLeafNodes(self, root: TreeNode, target: int) -> TreeNode:\n        self.dfs(root, target)\n        if root and root.val == target and not root.left and not root.right:\n            root = None\n        return root",
+        "original_function_name": "unknown",
+        "type": "POSITIVE (PLAGIARISM)"
+    },
+    {
+        "id": 7,
+        "verdict": "Original",
+        "label": 0,
+        "student_code": "def iterative_postorder(root):\n    if not root:\n        return []\n\n    result = []\n    stack = [root]\n    visited = set()\n\n    while stack:\n        node = stack[-1]\n\n        if node.left and node.left not in visited:\n            stack.append(node.left)\n        elif node.right and node.right not in visited:\n            stack.append(node.right)\n        else:\n            result.append(node.val)\n            visited.add(node)\n            stack.pop()\n\n    return result",
+        "original_code": "def postorderTraversal(self, root: TreeNode) -> List[int]:\n        postorder = []\n        self.traverse(root, postorder)\n        return postorder",
+        "original_function_name": "unknown",
+        "type": "NEGATIVE (ORIGINAL)"
+    },
+    {
+        "id": 8,
+        "verdict": "Plagiarism",
+        "label": 1,
+        "student_code": "def maxGain(share_prices):\n    deal_one = float('inf')\n    deal_two = float('inf')\n    present_gain = 0\n    overall_gain = 0\n    i = 0\n    while i < len(share_prices):\n        price = share_prices[i]\n        deal_one = min(deal_one, price)\n        present_gain = max(present_gain, price - deal_one)\n        deal_two = min(deal_two, price - present_gain)\n        overall_gain = max(overall_gain, price - deal_two)\n        i += 1\n    return overall_gain",
+        "original_code": "def maxProfit(self, prices: List[int]) -> int:\n        transaction_one = float(inf)\n        transaction_two = float(inf)\n        current_profit = 0\n        total_profit = 0\n        for price in prices:\n            transaction_one = min(transaction_one, price)\n            current_profit = max(current_profit, price - transaction_one)\n            transaction_two = min(transaction_two, price - current_profit)\n            total_profit = max(total_profit, price - transaction_two)\n        return total_profit",
+        "original_function_name": "unknown",
+        "type": "POSITIVE (PLAGIARISM)"
+    },
+    {
+        "id": 9,
+        "verdict": "Original",
+        "label": 0,
+        "student_code": "def connect_recursive(root: 'Node') -> 'Node':\n    def populate_next(node: 'Node', sibling: 'Node') -> None:\n        if not node:\n            return\n        node.next = sibling\n\n        populate_next(node.left, node.right)\n        if sibling:\n            populate_next(node.right, sibling.left)\n        else:\n            populate_next(node.right, None)\n\n    if root:\n        populate_next(root.left, root.right)\n    return root",
+        "original_code": "def connect(self, root: 'Node') -> 'Node':\n        if not root:\n            return root\n        queue = [root]\n        while queue:\n            length = len(queue)\n            level = []\n            while length:\n                node = queue.pop(0)\n                level.append(node)\n                if node.left:\n                    queue.append(node.left)\n                if node.right:\n                    queue.append(node.right)\n                length -= 1\n            l = len(level)\n            for i in range(l):\n                if i == l - 1:\n                    level[i].next = None\n                if i + 1 < l:\n                    level[i].next = level[i+1]\n        return root",
+        "original_function_name": "unknown",
+        "type": "NEGATIVE (ORIGINAL)"
+    },
+    {
+        "id": 10,
+        "verdict": "Plagiarism",
+        "label": 1,
+        "student_code": "def max_gain(values):\n    buy_one = float('inf')\n    buy_two = float('inf')\n    profit_one = 0\n    profit_two = 0\n    i = 0\n    while i < len(values):\n        price = values[i]\n        buy_one = min(buy_one, price)\n        profit_one = max(profit_one, price - buy_one)\n        buy_two = min(buy_two, price - profit_one)\n        profit_two = max(profit_two, price - buy_two)\n        i += 1\n    return profit_two",
+        "original_code": "def maxProfit(self, prices: List[int]) -> int:\n        transaction_one = float(inf)\n        transaction_two = float(inf)\n        current_profit = 0\n        total_profit = 0\n        for price in prices:\n            transaction_one = min(transaction_one, price)\n            current_profit = max(current_profit, price - transaction_one)\n            transaction_two = min(transaction_two, price - current_profit)\n            total_profit = max(total_profit, price - transaction_two)\n        return total_profit",
+        "original_function_name": "unknown",
+        "type": "POSITIVE (PLAGIARISM)"
+    },
+    {
+        "id": 11,
+        "verdict": "Original",
+        "label": 0,
+        "student_code": "def transpose_matrix(matrix):\n    rows = len(matrix)\n    cols = len(matrix[0]) if rows > 0 else 0\n    \n    transposed = [[0 for _ in range(rows)] for _ in range(cols)]\n    \n    for i in range(rows):\n        for j in range(cols):\n            transposed[j][i] = matrix[i][j]\n            \n    return transposed",
+        "original_code": "def diagonalSort(self, mat: List[List[int]]) -> List[List[int]]:\n        self.rows = len(mat)\n        self.cols = len(mat[0])\n        self.diagonalRowsCrawler(mat)\n        return mat",
+        "original_function_name": "unknown",
+        "type": "NEGATIVE (ORIGINAL)"
+    },
+    {
+        "id": 12,
+        "verdict": "Plagiarism",
+        "label": 1,
+        "student_code": "def find_smallest_divisor(numbers, limit):\n    low = 1\n    high = max(numbers)\n    while low < high:\n        mid = (low + high) // 2\n        total = 0\n        for num in numbers:\n            total += (num + mid - 1) // mid\n        if total > limit:\n            low = mid + 1\n        else:\n            high = mid\n    return low",
+        "original_code": "def smallestDivisor(self, nums: List[int], threshold: int) -> int:\n        l = 1\n        r = max(nums)\n        while l < r:\n            m = (l+r) // 2\n            result = sum([1 + n//m if n%m else n//m for n in nums])\n            if result > threshold:\n                l = m + 1\n            else:\n                r = m\n        return l",
+        "original_function_name": "unknown",
+        "type": "POSITIVE (PLAGIARISM)"
+    },
+    {
+        "id": 13,
+        "verdict": "Original",
+        "label": 0,
+        "student_code": "def findSecondMinimumValue(root):\n    if not root:\n        return -1\n    \n    min_val = root.val\n    second_min = float('inf')\n\n    def dfs(node):\n        nonlocal second_min\n        if not node:\n            return\n\n        if node.val > min_val and node.val < second_min:\n            second_min = node.val\n        elif node.val == min_val:\n            dfs(node.left)\n            dfs(node.right)\n        elif node.val < min_val:\n            return\n\n        else:\n             dfs(node.left)\n             dfs(node.right)\n\n    dfs(root)\n\n    return second_min if second_min != float('inf') else -1",
+        "original_code": "def findSecondMinimumValue(self, root: TreeNode) -> int:\n        result = []\n        self.preorder(root, result)\n        return sorted(result)[1] if len(result) > 1 else -1",
+        "original_function_name": "unknown",
+        "type": "NEGATIVE (ORIGINAL)"
+    },
+    {
+        "id": 14,
+        "verdict": "Plagiarism",
+        "label": 1,
+        "student_code": "def depth_first_search(basenode, sought):\n    if not basenode:\n        return\n    depth_first_search(basenode.left, sought)\n    depth_first_search(basenode.right, sought)\n    if basenode.left and basenode.left.val == sought and not basenode.left.left and not basenode.left.right:\n        basenode.left = None\n    if basenode.right and basenode.right.val == sought and not basenode.right.left and not basenode.right.right:\n        basenode.right = None",
+        "original_code": "def dfs(self, root, target):\n        if not root:\n            return\n        self.dfs(root.left, target)\n        self.dfs(root.right, target)\n        if root.left and root.left.val == target and not root.left.left and not root.left.right:\n            root.left = None\n        if root.right and root.right.val == target and not root.right.left and not root.right.right:\n            root.right = None",
+        "original_function_name": "unknown",
+        "type": "POSITIVE (PLAGIARISM)"
+    },
+    {
+        "id": 15,
+        "verdict": "Original",
+        "label": 0,
+        "student_code": "def findSecondMinimumValue(root):\n    if not root or (not root.left and not root.right):\n        return -1\n    \n    min_val = root.val\n    second_min = float('inf')\n\n    def inorder(node):\n        nonlocal second_min\n        if not node:\n            return\n        \n        inorder(node.left)\n\n        if node.val > min_val and node.val < second_min:\n            second_min = node.val\n\n        inorder(node.right)\n\n    inorder(root)\n\n    return second_min if second_min != float('inf') else -1",
+        "original_code": "def findSecondMinimumValue(self, root: TreeNode) -> int:\n        result = []\n        self.preorder(root, result)\n        return sorted(result)[1] if len(result) > 1 else -1",
+        "original_function_name": "unknown",
+        "type": "NEGATIVE (ORIGINAL)"
+    }
+]

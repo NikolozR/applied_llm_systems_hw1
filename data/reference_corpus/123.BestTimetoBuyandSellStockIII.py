@@ -1,0 +1,13 @@
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        transaction_one = float(inf)
+        transaction_two = float(inf)
+        current_profit = 0
+        total_profit = 0
+        for price in prices:
+            transaction_one = min(transaction_one, price)
+            current_profit = max(current_profit, price - transaction_one)
+            transaction_two = min(transaction_two, price - current_profit)
+            total_profit = max(total_profit, price - transaction_two)
+        return total_profit

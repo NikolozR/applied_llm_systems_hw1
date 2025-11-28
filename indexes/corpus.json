@@ -1,0 +1,177 @@
+[
+    {
+        "doc_id": 0,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "658.FindKClosestElements.py",
+        "text": "def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:\n        length = len(arr)\n        l = 0\n        r = length - 1\n        while l + 1 < r:\n            m = (l + r) // 2\n            if arr[m-1] <= x <= arr[m]:\n                l, r = self.pickNumber(arr, m, k, x, length)\n                return arr[l: r+1]\n            if x < arr[m]:\n                r = m\n            else:\n                l = m\n        if l == 0:\n            return arr[:min(k, length)]\n        if r == length - 1:\n            return arr[-k:]"
+    },
+    {
+        "doc_id": 0,
+        "chunk_id": 1,
+        "chunk_type": "function",
+        "file_name": "658.FindKClosestElements.py",
+        "text": "def pickNumber(self, arr, m, k, x, length):\n        result = []\n        i = 1\n        j = 0\n        while k > 0:\n            if m + j > length - 1:\n                result.sort()\n                return result[0] - k, result[-1]\n            if m-i >= 0 and x - arr[m-i] <= arr[m + j] - x:\n                result.append(m-i)\n                i += 1\n            else:\n                result.append(m + j)\n                j += 1\n            k -= 1\n        result.sort()\n        return result[0], result[-1]"
+    },
+    {
+        "doc_id": 1,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "2.AddTwoNumbers.py",
+        "text": "def add2Numbers(x, k):\n    t = x + k\n    return x + k"
+    },
+    {
+        "doc_id": 2,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "671.SecondMinimumNodeInaBinaryTree.py",
+        "text": "def findSecondMinimumValue(self, root: TreeNode) -> int:\n        result = []\n        self.preorder(root, result)\n        return sorted(result)[1] if len(result) > 1 else -1"
+    },
+    {
+        "doc_id": 2,
+        "chunk_id": 1,
+        "chunk_type": "function",
+        "file_name": "671.SecondMinimumNodeInaBinaryTree.py",
+        "text": "def preorder(self, root, result):\n        if not root:\n            return 0\n        if root.val not in result:\n            result.append(root.val)\n        if root.left:\n            self.preorder(root.left, result)\n        if root.right:\n            self.preorder(root.right, result)"
+    },
+    {
+        "doc_id": 3,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "BinaryTreeMaximumPathSum.py",
+        "text": "def maxPathSum(self, root: TreeNode) -> int:\n        self.sum = -9999999999 #float('-inf')\n        self.getSum(root)\n        return self.sum"
+    },
+    {
+        "doc_id": 3,
+        "chunk_id": 1,
+        "chunk_type": "function",
+        "file_name": "BinaryTreeMaximumPathSum.py",
+        "text": "def getSum(self, root):\n        if root is None: return 0\n        left = self.getSum(root.left)\n        right = self.getSum(root.right)\n        max_in_node = max(max(left, right) + root.val, root.val)\n        max_sum = max(max_in_node, left + right + root.val)\n        self.sum = max(self.sum, max_sum)\n        return max_in_node"
+    },
+    {
+        "doc_id": 4,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "771.JewelsandStones.py",
+        "text": "def numJewelsInStones(self, J: str, S: str) -> int:\n        i = len(J) - 1\n        count = 0\n        while i >= 0:\n            if J[i] in S:\n                count += S.count(J[i])\n            i -= 1\n        return count"
+    },
+    {
+        "doc_id": 5,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "1345.JumpGameIV.py",
+        "text": "def minJumps(self, arr: List[int]) -> int:\n        indices = {}\n        visited = set()\n        queue = [[0, 0]] # index, step\n        length = len(arr)\n        for ind, num in enumerate(arr):\n            if num not in indices:\n                indices[num] = []\n            indices[num].append(ind)\n        while queue:\n            index, steps = queue.pop(0)\n            if index == length - 1:\n                break\n            if indices[arr[index]]:\n                for i in indices[arr[index]]:\n                    if i not in visited:\n                        visited.add(i)\n                        queue.append([i, steps+1])\n                indices[arr[index]] = []\n            if index - 1 > 0 and index - 1 not in visited:\n                visited.add(index-1)\n                queue.append([index-1, steps+1])\n            if index + 1 not in visited:\n                visited.add(index+1)\n                queue.append([index+1, steps+1])\n        return steps"
+    },
+    {
+        "doc_id": 6,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "116.PopulatingNextRightPointersinEachNode.py",
+        "text": "def connect(self, root: 'Node') -> 'Node':\n        if not root:\n            return root\n        queue = [root]\n        while queue:\n            length = len(queue)\n            level = []\n            while length:\n                node = queue.pop(0)\n                level.append(node)\n                if node.left:\n                    queue.append(node.left)\n                if node.right:\n                    queue.append(node.right)\n                length -= 1\n            l = len(level)\n            for i in range(l):\n                if i == l - 1:\n                    level[i].next = None\n                if i + 1 < l:\n                    level[i].next = level[i+1]\n        return root"
+    },
+    {
+        "doc_id": 7,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "923.3SumWithMultiplicity.py",
+        "text": "def threeSumMulti(self, arr: List[int], target: int) -> int:\n        count = 0\n        counter = Counter(arr)\n        arr = list(counter.keys())\n        length = len(arr)\n        modulo = 1000000007\n\n        for i in range(length):\n            for j in range(i, length):\n                if target - arr[i] - arr[j] in counter:\n                    if arr[i] == arr[j] == target-arr[i]-arr[j]:\n                        count += counter[arr[i]] * (counter[arr[i]]-1) * (counter[arr[i]]-2) // 6\n                    elif arr[i] == arr[j]:\n                        count += counter[target-arr[i]-arr[j]] * (counter[arr[i]]) * (counter[arr[i]]-1) // 2\n                    elif arr[i] < target-arr[i]-arr[j] and arr[j] < target-arr[i]-arr[j]:\n                        count += counter[arr[i]] * counter[arr[j]] * counter[target-arr[i]-arr[j]]\n\n        return count % modulo"
+    },
+    {
+        "doc_id": 8,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "123.BestTimetoBuyandSellStockIII.py",
+        "text": "def maxProfit(self, prices: List[int]) -> int:\n        transaction_one = float(inf)\n        transaction_two = float(inf)\n        current_profit = 0\n        total_profit = 0\n        for price in prices:\n            transaction_one = min(transaction_one, price)\n            current_profit = max(current_profit, price - transaction_one)\n            transaction_two = min(transaction_two, price - current_profit)\n            total_profit = max(total_profit, price - transaction_two)\n        return total_profit"
+    },
+    {
+        "doc_id": 9,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "1338.ReduceArraySizetoTheHalf.py",
+        "text": "def minSetSize(self, arr: List[int]) -> int:\n        numbers = {}\n        half = len(arr) // 2\n        for number in arr:\n            if number not in numbers:\n                numbers[number] = 1\n            else:\n                numbers[number] += 1\n        for index, value in enumerate(sorted(list(numbers.values()), reverse=True)):\n            half -= value\n            if half <= 0:\n                return index + 1"
+    },
+    {
+        "doc_id": 10,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "667.BeautifulArrangementII.py",
+        "text": "def constructArray(self, n: int, k: int) -> List[int]:\n        array = []\n        visited = set()\n        k += 1\n        for i in range(n):\n            i += 1\n            if i not in visited:\n                array.append(i)\n                visited.add(i)\n            if k not in visited:\n                array.append(k)\n                visited.add(k)\n                k -= 1\n        return array"
+    },
+    {
+        "doc_id": 11,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "145.BinaryTreePostorderTraversal.py",
+        "text": "def postorderTraversal(self, root: TreeNode) -> List[int]:\n        postorder = []\n        self.traverse(root, postorder)\n        return postorder"
+    },
+    {
+        "doc_id": 11,
+        "chunk_id": 1,
+        "chunk_type": "function",
+        "file_name": "145.BinaryTreePostorderTraversal.py",
+        "text": "def traverse(self, root, postorder):\n        if not root:\n            return 0\n        self.traverse(root.left, postorder)\n        self.traverse(root.right, postorder)\n        postorder.append(root.val)"
+    },
+    {
+        "doc_id": 12,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "1325.DeleteLeavesWithaGivenValue.py",
+        "text": "def removeLeafNodes(self, root: TreeNode, target: int) -> TreeNode:\n        self.dfs(root, target)\n        if root and root.val == target and not root.left and not root.right:\n            root = None\n        return root"
+    },
+    {
+        "doc_id": 12,
+        "chunk_id": 1,
+        "chunk_type": "function",
+        "file_name": "1325.DeleteLeavesWithaGivenValue.py",
+        "text": "def dfs(self, root, target):\n        if not root:\n            return\n        self.dfs(root.left, target)\n        self.dfs(root.right, target)\n        if root.left and root.left.val == target and not root.left.left and not root.left.right:\n            root.left = None\n        if root.right and root.right.val == target and not root.right.left and not root.right.right:\n            root.right = None"
+    },
+    {
+        "doc_id": 13,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "deletenode.py",
+        "text": "def deleteNode(self, root, key):\n    if not root: return None\n    if key < root.val: \n        root.left = self.deleteNode(root.left, key)\n    elif key > root.val:\n        root.right = self.deleteNode(root.right, key)\n    else:\n        # if this node has only one child or no child:\n        if not root.left:\n            temp = root.right\n            root = None\n            return temp\n        elif not root.right:\n            temp = root.left\n            root = None\n            return temp\n        \n        # otherwise, find the inorder successor:\n        curr = root.right\n        while curr.left:\n            curr = curr.left\n        \n        root.val = curr.val\n        root.right = self.deleteNode(root.right, curr.val)\n    return root"
+    },
+    {
+        "doc_id": 14,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "1283.FindtheSmallestDivisorGivenaThreshold.py",
+        "text": "def smallestDivisor(self, nums: List[int], threshold: int) -> int:\n        l = 1\n        r = max(nums)\n        while l < r:\n            m = (l+r) // 2\n            result = sum([1 + n//m if n%m else n//m for n in nums])\n            if result > threshold:\n                l = m + 1\n            else:\n                r = m\n        return l"
+    },
+    {
+        "doc_id": 15,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "1329.SorttheMatrixDiagonally.py",
+        "text": "def diagonalSort(self, mat: List[List[int]]) -> List[List[int]]:\n        self.rows = len(mat)\n        self.cols = len(mat[0])\n        self.diagonalRowsCrawler(mat)\n        return mat"
+    },
+    {
+        "doc_id": 15,
+        "chunk_id": 1,
+        "chunk_type": "function",
+        "file_name": "1329.SorttheMatrixDiagonally.py",
+        "text": "def diagonalRowsCrawler(self, mat: List[List[int]]) -> None:\n        col = self.cols\n        for row in range(self.rows):\n            # iterate through diagonals on first row\n            while col:\n                col -= 1\n                self.diagonalValueSort(mat, row, col)\n            # iterate through diagonals on other rows\n            self.diagonalValueSort(mat, row, col)"
+    },
+    {
+        "doc_id": 15,
+        "chunk_id": 2,
+        "chunk_type": "function",
+        "file_name": "1329.SorttheMatrixDiagonally.py",
+        "text": "def diagonalValueSort(self, mat: List[List[int]], row: int, col: int) -> None:\n        diagonal_values = []\n        # gather values\n        while row < self.rows and col < self.cols:\n            diagonal_values.append(mat[row][col])\n            row += 1\n            col += 1\n        # sort values\n        diagonal_values.sort()\n        # replace current values with sorted\n        while row > 0 and col > 0:\n            row -= 1\n            col -= 1\n            mat[row][col] = diagonal_values.pop()"
+    },
+    {
+        "doc_id": 16,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "3.LongestSubstringWithoutRepeatingCharacters.py",
+        "text": "def lengthOfLongestSubstring(self, s: str) -> int:\n        i = 0\n        j = 1\n        lss = 0\n        length = len(s)\n        if length < 2:\n            return length\n        s += s[-1]\n        while j <= length:\n            if len(set(s[i:j])) < len(s[i:j]):\n                i += 1\n            lss = max(lss, len(s[i:j]))\n            j += 1\n        return lss"
+    },
+    {
+        "doc_id": 17,
+        "chunk_id": 0,
+        "chunk_type": "function",
+        "file_name": "containsDuplicate.py",
+        "text": "def containsNearbyDuplicate(self, nums, k):\n    if len(nums) <= k + 1: return len(nums) != len(set(nums))\n    if k == 0: return False\n    s = set(nums[:k])\n    for i in range(k, len(nums)):\n        if nums[i] in s: return True\n        else:\n            s.remove(nums[i - k])\n            s.add(nums[i])\n    return False"
+    }
+]
