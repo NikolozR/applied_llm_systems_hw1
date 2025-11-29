@@ -15,7 +15,7 @@ if not api_key:
 client = genai.Client(api_key=api_key)
 
 INPUT_CORPUS = "indexes/corpus.json" 
-OUTPUT_FILE = "test_dataset.json"
+OUTPUT_FILE = "data/test_dataset.json"
 TOTAL_CASES = 30 
 
 
